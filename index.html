@@ -181,11 +181,11 @@
   <ul>
     <li><a href="#work">Work</a></li>
     <li><a href="#gui">GUI</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#drones">Drones</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#building">Building</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -260,8 +260,8 @@
     <div class="card reveal">
       <div class="meta">IN-HOUSE TOOLING · 15 PROGRAMS</div>
       <h3>Lamp test systems that replaced vendor boxes</h3>
-      <p>Designed and programmed test boxes with switch, phone and web-app control, relay/MOSFET drive and on-board cycle logging. Cost per box dropped from ₹2 lakh+ to ₹3–5k.</p>
-      <div class="tags"><span class="tag">ESP32</span><span class="tag">Web UI</span><span class="tag">CAN / LIN</span></div>
+      <p>Designed and programmed test boxes with switch, phone and web-app control, relay/MOSFET drive and on-board cycle logging. For the CAN/LIN variants I designed LIN_CAN_PICO, a compact CAN + LIN interface board (TJA1051, TJA1021). Cost per box dropped from ₹2 lakh+ to ₹3–5k, an estimated ₹30 lakh+ saved.</p>
+      <div class="tags"><span class="tag">ESP32</span><span class="tag">Web UI</span><span class="tag">CAN / LIN</span><span class="tag">PCB design</span></div>
     </div>
 
     <div class="card reveal">
@@ -297,6 +297,29 @@
   </div>
 </section>
 
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="eyebrow reveal">// toolbox</div>
+  <h2 class="reveal">Skills</h2>
+  <div class="card reveal">
+    <div class="skillrow"><span class="label">MCUs</span><span class="tag">TI MSPM0</span><span class="tag">PIC16F</span><span class="tag">ESP32 / S3</span><span class="tag">Renesas RL78</span><span class="tag">STM32</span><span class="tag">RP2040</span></div>
+    <div class="skillrow"><span class="label">Protocols</span><span class="tag">CAN</span><span class="tag">LIN</span><span class="tag">UART</span><span class="tag">I²C</span><span class="tag">SPI</span><span class="tag">MAVLink</span><span class="tag">MQTT</span></div>
+    <div class="skillrow"><span class="label">Languages</span><span class="tag">Embedded C</span><span class="tag">C++</span><span class="tag">Python</span><span class="tag">MicroPython</span></div>
+    <div class="skillrow"><span class="label">Quality &amp; test</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span><span class="tag">Kikusui PBZ pulse tests</span></div>
+    <div class="skillrow"><span class="label">GUI</span><span class="tag">LVGL</span><span class="tag">SquareLine Studio</span><span class="tag">Embedded web GUIs</span></div>
+    <div class="skillrow"><span class="label">IDEs</span><span class="tag">TI CCS / CCS Theia</span><span class="tag">STM32CubeIDE</span><span class="tag">Renesas CS+</span><span class="tag">MPLAB X + MCC</span><span class="tag">ESP-IDF</span><span class="tag">PlatformIO / Arduino</span></div>
+    <div class="skillrow" style="margin:0"><span class="label">Tools</span><span class="tag">Git</span><span class="tag">KiCad / EasyEDA</span><span class="tag">Fusion 360</span><span class="tag">Doxygen / UML</span></div>
+  </div>
+
+  <div class="medals" style="margin-top:20px">
+    <div class="medal reveal"><div class="big">1st</div><p>National Drone Racing Championship with DRDO, 2024</p></div>
+    <div class="medal reveal"><div class="big">AIR 11</div><p>Indian Drone Racing League (IDRL), FPV</p></div>
+    <div class="medal reveal"><div class="big">2nd</div><p>Board of International Aviation Games, 2022</p></div>
+    <div class="medal reveal"><div class="big">9 × 1st</div><p>Maharashtra state drone competitions, 2023–24</p></div>
+    <div class="medal reveal"><div class="big">B.Tech</div><p>ENTC, MIT Academy of Engineering, Pune · 2025</p></div>
+  </div>
+</section>
+
 <!-- ============ DRONES ============ -->
 <section id="drones">
   <div class="eyebrow reveal">// uav</div>
@@ -328,16 +351,14 @@
   </div>
   <div class="gallery">
     <div class="reveal"><div class="media" data-label="assets/drone-1.jpg"><img src="assets/drone-1.jpg" alt="Drone" loading="lazy"></div><div class="caption">Race quad</div></div>
-    <div class="reveal"><div class="media" data-src="assets/hexacopter" data-label="assets/hexacopter.mp4&#10;Hexacopter video"></div><div class="caption">Hexacopter — Pixhawk + Raspberry Pi, MAVLink</div></div>
-    <div class="reveal"><div class="media" data-label="assets/drone-3.jpg"><img src="assets/drone-3.jpg" alt="Podium" loading="lazy"></div><div class="caption">Podium / team</div></div>
+    <div class="reveal"><div class="media" data-label="assets/hexacopter.jpg"><img src="assets/hexacopter.jpg" alt="Hexacopter" loading="lazy"></div><div class="caption">Hexacopter — Pixhawk + Raspberry Pi, MAVLink</div></div>
   </div>
 
   <h3 class="reveal" style="font-size:1.4rem;font-weight:300;margin:46px 0 18px">My personal drone builds</h3>
-  <!-- PUT: assets/personal-drone-1.jpg, personal-drone-2.jpg, personal-drone-3.jpg -->
+  <!-- PUT: assets/personal-drone-1.jpg (tiny whoop), personal-drone-2.jpg (5-inch) -->
   <div class="gallery">
-    <div class="reveal"><div class="media" data-label="assets/personal-drone-1.jpg"><img src="assets/personal-drone-1.jpg" alt="Personal drone build 1" loading="lazy"></div><div class="caption">Personal build 1</div></div>
-    <div class="reveal"><div class="media" data-label="assets/personal-drone-2.jpg"><img src="assets/personal-drone-2.jpg" alt="Personal drone build 2" loading="lazy"></div><div class="caption">Personal build 2</div></div>
-    <div class="reveal"><div class="media" data-label="assets/personal-drone-3.jpg"><img src="assets/personal-drone-3.jpg" alt="Personal drone build 3" loading="lazy"></div><div class="caption">Personal build 3</div></div>
+    <div class="reveal"><div class="media" data-label="assets/personal-drone-1.jpg"><img src="assets/personal-drone-1.jpg" alt="Personal drone build 1" loading="lazy"></div><div class="caption"><b>Tiny whoop</b> · 1S LiPo · ~2 min flights · analog FPV camera</div></div>
+    <div class="reveal"><div class="media" data-label="assets/personal-drone-2.jpg"><img src="assets/personal-drone-2.jpg" alt="Personal drone build 2" loading="lazy"></div><div class="caption"><b>5-inch FPV quad</b> · 4S LiPo · 1080p camera · range up to 5 km</div></div>
   </div>
 </section>
 
@@ -347,18 +368,11 @@
   <h2 class="reveal">Things I build after work</h2>
   <div class="grid">
     <div class="card reveal">
-      <div class="media" data-src="assets/hexacopter" data-label="assets/hexacopter.mp4&#10;Hexacopter video"></div>
+      <div class="media" data-label="assets/hexacopter.jpg"><img src="assets/hexacopter.jpg" alt="Hexacopter" loading="lazy"></div>
       <div class="meta">UAV · 2024</div>
       <h3>Hexacopter automation</h3>
       <p>Pixhawk 2.4.8 automated with a Raspberry Pi 4B over MAVLink. 2.5 kg lift, OpenCV object recognition.</p>
       <div class="tags"><span class="tag">MAVLink</span><span class="tag">Python</span><span class="tag">OpenCV</span></div>
-    </div>
-    <div class="card reveal">
-      <div class="media" data-label="assets/lin-can-pico.png&#10;PCB render / schematic"><img src="assets/lin-can-pico.png" alt="LIN CAN PCB" loading="lazy"></div>
-      <div class="meta">PCB · IN PROGRESS</div>
-      <h3>LIN_CAN_PICO</h3>
-      <p>Pico-footprint CAN + LIN board (TJA1051, TJA1021) for an ESP32-S3 relay controller.</p>
-      <div class="tags"><span class="tag">EasyEDA</span><span class="tag">CAN</span><span class="tag">LIN</span></div>
     </div>
     <div class="card reveal">
       <div class="media" data-label="assets/aquarium.jpg&#10;Tank + controller"><img src="assets/aquarium.jpg" alt="Aquarium" loading="lazy"></div>
@@ -406,29 +420,6 @@
       <div class="stages"><span class="now"></span></div>
       <div class="tags"><span class="tag">ESP32-S3</span><span class="tag">Relays</span><span class="tag">Pumps</span><span class="tag">Sensors</span><span class="tag">Automation</span></div>
     </div>
-  </div>
-</section>
-
-<!-- ============ SKILLS ============ -->
-<section id="skills">
-  <div class="eyebrow reveal">// toolbox</div>
-  <h2 class="reveal">Skills</h2>
-  <div class="card reveal">
-    <div class="skillrow"><span class="label">MCUs</span><span class="tag">TI MSPM0</span><span class="tag">PIC16F</span><span class="tag">ESP32 / S3</span><span class="tag">Renesas RL78</span><span class="tag">STM32</span><span class="tag">RP2040</span></div>
-    <div class="skillrow"><span class="label">Protocols</span><span class="tag">CAN</span><span class="tag">LIN</span><span class="tag">UART</span><span class="tag">I²C</span><span class="tag">SPI</span><span class="tag">MAVLink</span><span class="tag">MQTT</span></div>
-    <div class="skillrow"><span class="label">Languages</span><span class="tag">Embedded C</span><span class="tag">C++</span><span class="tag">Python</span><span class="tag">MicroPython</span></div>
-    <div class="skillrow"><span class="label">Quality &amp; test</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span><span class="tag">Kikusui PBZ pulse tests</span></div>
-    <div class="skillrow"><span class="label">GUI</span><span class="tag">LVGL</span><span class="tag">SquareLine Studio</span><span class="tag">Embedded web GUIs</span></div>
-    <div class="skillrow"><span class="label">IDEs</span><span class="tag">TI CCS / CCS Theia</span><span class="tag">STM32CubeIDE</span><span class="tag">Renesas CS+</span><span class="tag">MPLAB X + MCC</span><span class="tag">ESP-IDF</span><span class="tag">PlatformIO / Arduino</span></div>
-    <div class="skillrow" style="margin:0"><span class="label">Tools</span><span class="tag">Git</span><span class="tag">KiCad / EasyEDA</span><span class="tag">Fusion 360</span><span class="tag">Doxygen / UML</span></div>
-  </div>
-
-  <div class="medals" style="margin-top:20px">
-    <div class="medal reveal"><div class="big">1st</div><p>National Drone Racing Championship with DRDO, 2024</p></div>
-    <div class="medal reveal"><div class="big">AIR 11</div><p>Indian Drone Racing League (IDRL), FPV</p></div>
-    <div class="medal reveal"><div class="big">2nd</div><p>Board of International Aviation Games, 2022</p></div>
-    <div class="medal reveal"><div class="big">9 × 1st</div><p>Maharashtra state drone competitions, 2023–24</p></div>
-    <div class="medal reveal"><div class="big">B.Tech</div><p>ENTC, MIT Academy of Engineering, Pune · 2025</p></div>
   </div>
 </section>
 
