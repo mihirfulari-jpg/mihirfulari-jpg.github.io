@@ -474,7 +474,8 @@ document.querySelectorAll('.media[data-src]').forEach(m=>{
 document.querySelectorAll('.media img, .media video').forEach(el=>{
   const ph=()=>{el.parentElement.classList.add('ph');el.remove();};
   el.addEventListener('error',ph);
-  if(el.tagName==='IMG' && el.complete && el.naturalWidth===0) ph();
+  /* only treat a finished-but-broken image as missing; lazy images that haven't started loading are fine */
+  if(el.tagName==='IMG' && el.getAttribute('loading')!=='lazy' && el.complete && el.naturalWidth===0) ph();
 });
 
 /* ---------- typing effect ---------- */
