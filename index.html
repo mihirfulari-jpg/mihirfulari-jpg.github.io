@@ -117,6 +117,20 @@
   #contact .card{text-align:center;padding:50px 24px}
   footer{text-align:center;color:#4b5868;font-size:.8rem;padding:40px 0 60px;font-family:"JetBrains Mono",monospace}
 
+
+  /* in-progress */
+  .stages{display:flex;gap:6px;margin:14px 0 4px}
+  .stages span{flex:1;height:5px;border-radius:3px;background:#1b2532;position:relative;overflow:hidden}
+  .stages span.done{background:var(--cyan)}
+  .stages span.now::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--amber),transparent);animation:scan 1.6s linear infinite}
+  @keyframes scan{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+  .now-line{margin:14px 0 2px;font-size:.88rem;color:var(--text)}
+  .now-line small{display:block;font-family:"JetBrains Mono",monospace;font-size:.68rem;color:#5c6b7d;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+  .stage-labels{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.66rem;color:#5c6b7d}
+  .wip{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--amber);
+       border:1px solid rgba(245,158,11,.35);padding:3px 10px;border-radius:999px;margin-bottom:10px}
+  .wip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 1.2s infinite}
+
   /* reveal */
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
   .reveal.in{opacity:1;transform:none}
@@ -153,6 +167,7 @@
     <li><a href="#gui">GUI</a></li>
     <li><a href="#drones">Drones</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#building">Building</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -310,6 +325,45 @@
   </div>
 </section>
 
+<!-- ============ BUILDING NOW ============ -->
+<section id="building">
+  <div class="eyebrow reveal">// on the bench</div>
+  <h2 class="reveal">What I'm building now</h2>
+  <p class="reveal" style="color:var(--muted);max-width:720px;margin-bottom:28px">Personal projects in progress. This section updates as they move forward.</p>
+  <div class="grid">
+    <div class="card reveal">
+      <div class="media" data-label="assets/ffb-wheel.jpg&#10;FFB wheel build photo"><img src="assets/ffb-wheel.jpg" alt="Force-feedback mini wheel" loading="lazy"></div>
+      <div class="wip">in progress</div>
+      <h3>Force-feedback mini wheel</h3>
+      <p>USB HID PID force-feedback wheel for Euro Truck Simulator 2 on an ESP32-S3. N20 gearmotor on a DRV8874 driver, AS5600 magnetic encoders for the wheel and finger-pressed pedals, and a 2S Li-ion pack with BMS. Motor protection layers battery-compensated PWM limits, NTC-based thermal limits and the driver's hardware current limit.</p>
+      <!-- current stage: edit the text below -->
+      <div class="now-line"><small>current stage</small>Mechanical design in Autodesk Fusion</div>
+      <div class="stages"><span class="now"></span></div>
+      <div class="tags"><span class="tag">ESP32-S3</span><span class="tag">USB HID PID</span><span class="tag">DRV8874</span><span class="tag">AS5600</span><span class="tag">Power design</span></div>
+    </div>
+    <div class="card reveal">
+      <div class="media" data-label="assets/bike-display.jpg&#10;Bike dashboard render / prototype"><img src="assets/bike-display.jpg" alt="CAN dashboard for my TVS Ronin" loading="lazy"></div>
+      <div class="wip">in progress</div>
+      <h3>CAN dashboard for my TVS Ronin</h3>
+      <p>5-inch ESP32 display that reads the bike's CAN bus through the OBD2 port and decodes manufacturer frames with a DBC file, showing values OBD2 doesn't expose, like engine temperature. Planned: a full map from my own Android app, so no phone mount is needed.</p>
+      <!-- current stage: edit the text below -->
+      <div class="now-line"><small>current stage</small>Maturing the dashboard graphics</div>
+      <div class="stages"><span class="now"></span></div>
+      <div class="tags"><span class="tag">CAN / OBD2</span><span class="tag">DBC decoding</span><span class="tag">ESP32-P4</span><span class="tag">LVGL</span><span class="tag">Android</span></div>
+    </div>
+    <div class="card reveal">
+      <div class="media" data-label="assets/aquarium-v2.jpg&#10;220L tank / controller photo"><img src="assets/aquarium-v2.jpg" alt="Smart aquarium v2" loading="lazy"></div>
+      <div class="wip">in progress</div>
+      <h3>Smart aquarium v2</h3>
+      <p>ESP32-S3 controller for a 220 L planted tank: temperature sensing, automated water changes with drain and refill pumps, a 12-channel relay board and PIR-triggered lighting when someone is in front of the tank. Goal: only water parameters need my attention.</p>
+      <!-- current stage: edit the text below -->
+      <div class="now-line"><small>current stage</small>PCB design</div>
+      <div class="stages"><span class="now"></span></div>
+      <div class="tags"><span class="tag">ESP32-S3</span><span class="tag">Relays</span><span class="tag">Pumps</span><span class="tag">Sensors</span><span class="tag">Automation</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SKILLS ============ -->
 <section id="skills">
   <div class="eyebrow reveal">// toolbox</div>
@@ -317,9 +371,11 @@
   <div class="card reveal">
     <div class="skillrow"><span class="label">MCUs</span><span class="tag">TI MSPM0</span><span class="tag">PIC16F</span><span class="tag">ESP32 / S3</span><span class="tag">Renesas RL78</span><span class="tag">STM32</span><span class="tag">RP2040</span></div>
     <div class="skillrow"><span class="label">Protocols</span><span class="tag">CAN</span><span class="tag">LIN</span><span class="tag">UART</span><span class="tag">I²C</span><span class="tag">SPI</span><span class="tag">MAVLink</span><span class="tag">MQTT</span></div>
-    <div class="skillrow"><span class="label">Languages</span><span class="tag">Embedded C</span><span class="tag">C++</span><span class="tag">Python</span></div>
-    <div class="skillrow"><span class="label">Quality &amp; test</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span><span class="tag">Kikusui PBZ pulse tests</span><span class="tag">Doxygen / UML</span></div>
-    <div class="skillrow" style="margin:0"><span class="label">GUI &amp; tools</span><span class="tag">LVGL</span><span class="tag">SquareLine Studio</span><span class="tag">MPLAB X + MCC</span><span class="tag">ESP-IDF</span><span class="tag">PlatformIO</span><span class="tag">KiCad / EasyEDA</span><span class="tag">Fusion 360</span><span class="tag">Git</span></div>
+    <div class="skillrow"><span class="label">Languages</span><span class="tag">Embedded C</span><span class="tag">C++</span><span class="tag">Python</span><span class="tag">MicroPython</span></div>
+    <div class="skillrow"><span class="label">Quality &amp; test</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span><span class="tag">Kikusui PBZ pulse tests</span></div>
+    <div class="skillrow"><span class="label">GUI</span><span class="tag">LVGL</span><span class="tag">SquareLine Studio</span><span class="tag">Embedded web GUIs</span></div>
+    <div class="skillrow"><span class="label">IDEs</span><span class="tag">TI CCS / CCS Theia</span><span class="tag">STM32CubeIDE</span><span class="tag">Renesas CS+</span><span class="tag">MPLAB X + MCC</span><span class="tag">ESP-IDF</span><span class="tag">PlatformIO / Arduino</span></div>
+    <div class="skillrow" style="margin:0"><span class="label">Tools</span><span class="tag">Git</span><span class="tag">KiCad / EasyEDA</span><span class="tag">Fusion 360</span><span class="tag">Doxygen / UML</span></div>
   </div>
 
   <div class="medals" style="margin-top:20px">
