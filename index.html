@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mihir Fulari — Embedded Firmware Engineer</title>
+<meta name="description" content="Mihir Fulari — embedded firmware engineer in automotive lighting, embedded HMIs and UAVs. Pune, India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070a0f; --bg2:#0c1118; --card:#0f151e; --line:#1b2532;
+    --text:#e6edf3; --muted:#8b98a8; --cyan:#22d3ee; --amber:#f59e0b; --green:#34d399;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  /* animated background */
+  #bg{position:fixed;inset:0;z-index:-2;width:100%;height:100%}
+  .vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 0%,rgba(34,211,238,.10),transparent 60%),
+               radial-gradient(ellipse at 100% 100%,rgba(245,158,11,.07),transparent 50%),
+               radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.7))}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+      padding:14px 6vw;backdrop-filter:blur(12px);background:rgba(7,10,15,.6);border-bottom:1px solid rgba(27,37,50,.6)}
+  nav .logo{font-weight:700;letter-spacing:.5px}
+  nav .logo span{color:var(--cyan)}
+  nav ul{display:flex;gap:22px;list-style:none}
+  nav ul a{color:var(--muted);font-size:.92rem;transition:color .2s}
+  nav ul a:hover{color:var(--text)}
+  .burger{display:none;background:none;border:0;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+  section{padding:110px 6vw 40px;max-width:1200px;margin:0 auto}
+  .eyebrow{font-family:"JetBrains Mono",monospace;color:var(--cyan);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:28px;line-height:1.15}
+
+  /* hero */
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px}
+  .status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);border:1px solid var(--line);
+          padding:6px 14px;border-radius:999px;width:fit-content;margin-bottom:24px;background:rgba(15,21,30,.6)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  #hero h1{font-size:clamp(2.6rem,8vw,5.4rem);line-height:1.02;font-weight:700;letter-spacing:-1px}
+  #hero h1 .grad{background:linear-gradient(90deg,var(--cyan),#a5f3fc 40%,var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .typed{font-family:"JetBrains Mono",monospace;font-size:clamp(1rem,2.4vw,1.3rem);color:var(--muted);margin:22px 0 32px;min-height:1.6em}
+  .typed b{color:var(--cyan);font-weight:400}
+  .caret{display:inline-block;width:10px;height:1.1em;background:var(--cyan);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .btns{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{padding:12px 22px;border-radius:10px;font-weight:500;border:1px solid var(--line);color:var(--text);background:rgba(15,21,30,.7);transition:all .25s}
+  .btn:hover{border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,211,238,.15)}
+  .btn.primary{background:var(--cyan);color:#041016;border-color:var(--cyan)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:60px}
+  .stat{border-left:2px solid var(--cyan);padding:4px 0 4px 16px}
+  .stat .n{font-size:1.9rem;font-weight:700}
+  .stat .l{color:var(--muted);font-size:.88rem}
+  .scroll-hint{margin-top:60px;color:var(--muted);font-size:.8rem;font-family:"JetBrains Mono",monospace;animation:float 2.4s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(6px)}}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+  .card{background:linear-gradient(180deg,rgba(15,21,30,.92),rgba(12,17,24,.92));border:1px solid var(--line);border-radius:var(--radius);
+        padding:24px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+        background:linear-gradient(130deg,transparent 40%,rgba(34,211,238,.6),transparent 60%);background-size:250% 250%;
+        -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+        opacity:0;transition:opacity .3s}
+  .card:hover{transform:translateY(-4px);border-color:transparent}
+  .card:hover::before{opacity:1;animation:sweep 2s linear infinite}
+  @keyframes sweep{to{background-position:-250% 0}}
+  .card h3{font-size:1.15rem;margin-bottom:6px}
+  .card .meta{font-family:"JetBrains Mono",monospace;color:var(--amber);font-size:.78rem;margin-bottom:12px}
+  .card p,.card li{color:var(--muted);font-size:.95rem}
+  .card ul{padding-left:18px;margin-top:8px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:.72rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:#a5f3fc;background:rgba(34,211,238,.06)}
+  .card.feature{grid-column:1/-1}
+  .split{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center}
+
+  /* media slots */
+  .media{border-radius:12px;overflow:hidden;background:#0a0f15;aspect-ratio:16/10;position:relative;margin-bottom:16px}
+  .media img,.media video,.media iframe{width:100%;height:100%;object-fit:cover;display:block;border:0;transition:transform .6s}
+  .card:hover .media img{transform:scale(1.04)}
+  .media.ph{display:flex;align-items:center;justify-content:center;border:1.5px dashed #2a3a4d;
+            background:repeating-linear-gradient(45deg,#0a0f15 0 12px,#0c131b 12px 24px)}
+  .media.ph::after{content:attr(data-label);font-family:"JetBrains Mono",monospace;font-size:.78rem;color:#5c6b7d;text-align:center;padding:12px}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .gallery .media{margin:0;cursor:zoom-in}
+  .caption{font-size:.85rem;color:var(--muted);margin-top:8px}
+
+  /* timeline */
+  .timeline{border-left:1px solid var(--line);margin-left:8px;padding-left:28px}
+  .tl{position:relative;margin-bottom:34px}
+  .tl::before{content:"";position:absolute;left:-34px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+  .tl h3{font-size:1.2rem}
+  .tl .meta{font-family:"JetBrains Mono",monospace;color:var(--amber);font-size:.8rem;margin:2px 0 8px}
+  .tl p{color:var(--muted)}
+
+  /* achievements */
+  .medals{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .medal{padding:22px;border-radius:var(--radius);border:1px solid var(--line);background:rgba(15,21,30,.85)}
+  .medal .big{font-size:2.2rem;font-weight:700;background:linear-gradient(90deg,var(--amber),#fde68a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .medal p{color:var(--muted);font-size:.92rem}
+
+  /* skills */
+  .skillrow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .skillrow .label{width:100%;font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--muted)}
+
+  /* contact */
+  #contact .card{text-align:center;padding:50px 24px}
+  footer{text-align:center;color:#4b5868;font-size:.8rem;padding:40px 0 60px;font-family:"JetBrains Mono",monospace}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* lightbox */
+  #lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:100;cursor:zoom-out;padding:20px}
+  #lb img{max-width:95vw;max-height:90vh;border-radius:10px}
+  #lb.open{display:flex}
+
+  @media (max-width:820px){
+    nav ul{position:fixed;top:58px;right:0;left:0;flex-direction:column;gap:0;background:rgba(7,10,15,.97);
+           max-height:0;overflow:hidden;transition:max-height .35s}
+    nav ul.open{max-height:420px;border-bottom:1px solid var(--line)}
+    nav ul li a{display:block;padding:14px 6vw}
+    .burger{display:block}
+    .split{grid-template-columns:1fr}
+    section{padding-top:90px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="vignette"></div>
+
+<nav>
+  <a href="#hero" class="logo mono">mihir<span>.fw</span></a>
+  <button class="burger" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#gui">GUI</a></li>
+    <li><a href="#drones">Drones</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="status"><span class="dot"></span> Open to firmware roles · Pune, India</div>
+  <h1>Mihir Fulari<br><span class="grad">Embedded Firmware Engineer</span></h1>
+  <div class="typed"><span id="typed"></span><span class="caret"></span></div>
+  <div class="btns">
+    <a class="btn primary" href="assets/Mihir_Fulari_Resume.pdf" target="_blank">Download résumé</a>
+    <a class="btn" href="https://www.linkedin.com/in/mihir-fulari-370893227" target="_blank">LinkedIn</a>
+    <a class="btn" href="mailto:mihirfulari@gmail.com">Email me</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n" data-count="15">0</div><div class="l">lamp programs with in-house test systems</div></div>
+    <div class="stat"><div class="n">₹<span data-count="30">0</span>L+</div><div class="l">estimated test-equipment savings</div></div>
+    <div class="stat"><div class="n" data-count="0">0</div><div class="l">software warranty returns on VW Taigun</div></div>
+    <div class="stat"><div class="n">#<span data-count="1">0</span></div><div class="l">National drone race (with DRDO), 2024</div></div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="work">
+  <div class="eyebrow reveal">// experience</div>
+  <h2 class="reveal">Automotive lighting firmware at Lumax Industries</h2>
+
+  <div class="timeline reveal" style="margin-bottom:40px">
+    <div class="tl">
+      <h3>Engineer — R&amp;D, Design &amp; Development</h3>
+      <div class="meta">Lumax Industries · Chakan, Pune · Jun 2025 – present</div>
+      <p>Graduate Engineer Trainee (Jun 2025), confirmed as Engineer (Jun 2026). Lamp-control firmware, test systems and HMIs for VW, Skoda, Tata, Mahindra, Force, Bajaj and Hero programs.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Taigun: the one lamp you may show -->
+    <div class="card feature reveal">
+      <div class="split">
+        <div>
+          <div class="meta">PRODUCTION · VW TAIGUN (VW216) · TI MSPM0L1305</div>
+          <h3>Taigun tail lamp — from pre-SOP to the road</h3>
+          <p>Joined before SOP and helped speed up bug fixing ahead of launch. In production with zero software-related warranty returns.</p>
+          <ul>
+            <li>Pulse and profile testing on a Kikusui PBZ bipolar supply</li>
+            <li>Fixed welcome-animation and PCB flicker issues; overvoltage derating for pulse 5b</li>
+            <li>MISRA compliance with VW-agreed deviations; windowed watchdog</li>
+            <li>Doxygen + UML documentation down to the state machines</li>
+          </ul>
+          <div class="tags"><span class="tag">Embedded C</span><span class="tag">MISRA</span><span class="tag">MSPM0</span><span class="tag">Pulse testing</span></div>
+        </div>
+        <!-- PUT: assets/taigun.jpg (a photo of the Taigun tail lamp lit up, taken on a public road / showroom) -->
+        <div class="media" data-label="assets/taigun.jpg&#10;Taigun tail lamp photo"><img src="assets/taigun.jpg" alt="VW Taigun tail lamp" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="meta">PRODUCTION · TATA · PIC16F1524x</div>
+      <h3>DRL lamp firmware from scratch</h3>
+      <p>DRL / position / turn control with LP8868 drivers, PWM dimming, fault and undervoltage monitoring and thermal derating. MISRA C:2025 with documented deviations; flash and RAM budgeted via .map analysis.</p>
+      <div class="tags"><span class="tag">PIC</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="meta">IN-HOUSE TOOLING · 15 PROGRAMS</div>
+      <h3>Lamp test systems that replaced vendor boxes</h3>
+      <p>Designed and programmed test boxes with switch, phone and web-app control, relay/MOSFET drive and on-board cycle logging. Cost per box dropped from ₹2 lakh+ to ₹3–5k.</p>
+      <div class="tags"><span class="tag">ESP32</span><span class="tag">Web UI</span><span class="tag">CAN / LIN</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="meta">POC · SKODA KUSHAQ · 2 WEEKS</div>
+      <h3>Animated tail lamp — Lumax award</h3>
+      <p>Reprogrammed Taigun PCBs and modified legacy static boards to run animations. Recognised by Lumax for the delivery speed.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="meta">POC · TATA SAFARI · FEB – MAY 2026</div>
+      <h3>Front grill illumination</h3>
+      <p>ESP32 controller with CAN, NovaStar media control over UART and welcome/goodbye animations. Led all supplier technical meetings (REFOND, NovaStar, PCB and LED strip suppliers).</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="meta">DRIVER BRING-UP</div>
+      <h3>LED drivers: ELMOS &amp; Lumissil</h3>
+      <p>Fixed an ISR/main-loop UART timing race; built an ESP32 I²C OTP programmer; wrote a lightweight IS32LT3138 driver for a Hero two-wheeler headlamp PoC.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUI ============ -->
+<section id="gui">
+  <div class="eyebrow reveal">// embedded GUI</div>
+  <h2 class="reveal">HMIs &amp; graphics panels</h2>
+  <p class="reveal" style="color:var(--muted);max-width:720px;margin-bottom:28px">LVGL touch interfaces on ESP32-S3: real-time plots, animated controls and web dashboards for lamp testing and demos.</p>
+  <div class="gallery">
+    <!-- PUT your LVGL / panel screenshots here. Copy a block to add more. -->
+    <div class="reveal"><div class="media" data-label="assets/gui-1.jpg&#10;LVGL plot screen"><img src="assets/gui-1.jpg" alt="LVGL plot screen" loading="lazy"></div><div class="caption">5" LVGL HMI — live voltage, current &amp; temperature plots</div></div>
+    <div class="reveal"><div class="media" data-label="assets/gui-2.jpg&#10;Main control screen"><img src="assets/gui-2.jpg" alt="HMI main screen" loading="lazy"></div><div class="caption">Touch control screen with animated buttons</div></div>
+    <div class="reveal"><div class="media" data-label="assets/gui-3.jpg&#10;7-inch ISOL 2025 demo panel"><img src="assets/gui-3.jpg" alt="7 inch HMI demo" loading="lazy"></div><div class="caption">7" HMI demo — ISOL 2025</div></div>
+  </div>
+</section>
+
+<!-- ============ DRONES ============ -->
+<section id="drones">
+  <div class="eyebrow reveal">// uav</div>
+  <h2 class="reveal">Drones &amp; FPV racing</h2>
+  <div class="card feature reveal" style="margin-bottom:20px">
+    <div class="split">
+      <!-- PUT: assets/fpv-idrl.mp4 (short, compressed clip under ~15 MB). For a YouTube link, swap the <video> for:
+           <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+      <div class="media" data-label="assets/fpv-idrl.mp4&#10;FPV race clip"><video src="assets/fpv-idrl.mp4" autoplay muted loop playsinline></video></div>
+      <div>
+        <div class="meta">1ST PLACE · NATIONAL DRONE RACE WITH DRDO · 2024</div>
+        <h3>My FPV feed from the race</h3>
+        <p>National champion, 2nd at the Board of International Aviation Games (2022), and 15 podiums in Maharashtra state competitions. Former president of the MIT AOE Drone Club.</p>
+      </div>
+    </div>
+  </div>
+  <div class="gallery">
+    <div class="reveal"><div class="media" data-label="assets/drone-1.jpg"><img src="assets/drone-1.jpg" alt="Drone" loading="lazy"></div><div class="caption">Race quad</div></div>
+    <div class="reveal"><div class="media" data-label="assets/drone-2.jpg"><img src="assets/drone-2.jpg" alt="Hexacopter" loading="lazy"></div><div class="caption">Hexacopter — Pixhawk + Raspberry Pi, MAVLink</div></div>
+    <div class="reveal"><div class="media" data-label="assets/drone-3.jpg"><img src="assets/drone-3.jpg" alt="Podium" loading="lazy"></div><div class="caption">Podium / team</div></div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="eyebrow reveal">// side projects</div>
+  <h2 class="reveal">Things I build after work</h2>
+  <div class="grid">
+    <div class="card reveal">
+      <div class="media" data-label="assets/hexacopter.jpg"><img src="assets/hexacopter.jpg" alt="Hexacopter" loading="lazy"></div>
+      <div class="meta">UAV · 2024</div>
+      <h3>Hexacopter automation</h3>
+      <p>Pixhawk 2.4.8 automated with a Raspberry Pi 4B over MAVLink. 2.5 kg lift, OpenCV object recognition.</p>
+      <div class="tags"><span class="tag">MAVLink</span><span class="tag">Python</span><span class="tag">OpenCV</span></div>
+    </div>
+    <div class="card reveal">
+      <div class="media" data-label="assets/lin-can-pico.png&#10;PCB render / schematic"><img src="assets/lin-can-pico.png" alt="LIN CAN PCB" loading="lazy"></div>
+      <div class="meta">PCB · IN PROGRESS</div>
+      <h3>LIN_CAN_PICO</h3>
+      <p>Pico-footprint CAN + LIN board (TJA1051, TJA1021) for an ESP32-S3 relay controller.</p>
+      <div class="tags"><span class="tag">EasyEDA</span><span class="tag">CAN</span><span class="tag">LIN</span></div>
+    </div>
+    <div class="card reveal">
+      <div class="media" data-label="assets/aquarium.jpg&#10;Tank + controller"><img src="assets/aquarium.jpg" alt="Aquarium" loading="lazy"></div>
+      <div class="meta">IOT · HOBBY</div>
+      <h3>Smart aquarium</h3>
+      <p>Planted tanks with relay automation for lights and equipment — part hobby, part embedded project.</p>
+      <div class="tags"><span class="tag">ESP</span><span class="tag">Relays</span><span class="tag">Automation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="eyebrow reveal">// toolbox</div>
+  <h2 class="reveal">Skills</h2>
+  <div class="card reveal">
+    <div class="skillrow"><span class="label">MCUs</span><span class="tag">TI MSPM0</span><span class="tag">PIC16F</span><span class="tag">ESP32 / S3</span><span class="tag">Renesas RL78</span><span class="tag">STM32</span><span class="tag">RP2040</span></div>
+    <div class="skillrow"><span class="label">Protocols</span><span class="tag">CAN</span><span class="tag">LIN</span><span class="tag">UART</span><span class="tag">I²C</span><span class="tag">SPI</span><span class="tag">MAVLink</span><span class="tag">MQTT</span></div>
+    <div class="skillrow"><span class="label">Languages</span><span class="tag">Embedded C</span><span class="tag">C++</span><span class="tag">Python</span></div>
+    <div class="skillrow"><span class="label">Quality &amp; test</span><span class="tag">MISRA C:2025</span><span class="tag">PC-lint Plus</span><span class="tag">Kikusui PBZ pulse tests</span><span class="tag">Doxygen / UML</span></div>
+    <div class="skillrow" style="margin:0"><span class="label">GUI &amp; tools</span><span class="tag">LVGL</span><span class="tag">SquareLine Studio</span><span class="tag">MPLAB X + MCC</span><span class="tag">ESP-IDF</span><span class="tag">PlatformIO</span><span class="tag">KiCad / EasyEDA</span><span class="tag">Fusion 360</span><span class="tag">Git</span></div>
+  </div>
+
+  <div class="medals" style="margin-top:20px">
+    <div class="medal reveal"><div class="big">1st</div><p>National Drone Racing Championship with DRDO, 2024</p></div>
+    <div class="medal reveal"><div class="big">2nd</div><p>Board of International Aviation Games, 2022</p></div>
+    <div class="medal reveal"><div class="big">9 × 1st</div><p>Maharashtra state drone competitions, 2023–24</p></div>
+    <div class="medal reveal"><div class="big">B.Tech</div><p>ENTC, MIT Academy of Engineering, Pune · 2025</p></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="card reveal">
+    <div class="eyebrow">// let's talk</div>
+    <h2 style="margin-bottom:14px">Building something with LEDs, CAN or screens?</h2>
+    <p style="color:var(--muted);margin-bottom:26px">I'm happy to talk about firmware roles and interesting hardware.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn primary" href="mailto:mihirfulari@gmail.com">mihirfulari@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/mihir-fulari-370893227" target="_blank">LinkedIn</a>
+      <a class="btn" href="assets/Mihir_Fulari_Resume.pdf" target="_blank">Résumé</a>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Mihir Fulari · built with plain HTML, hosted on GitHub Pages</footer>
+<div id="lb" onclick="this.classList.remove('open')"><img alt=""></div>
+
+<script>
+/* ---------- missing media -> placeholder ---------- */
+document.querySelectorAll('.media img, .media video').forEach(el=>{
+  const ph=()=>{el.parentElement.classList.add('ph');el.remove();};
+  el.addEventListener('error',ph);
+  if(el.tagName==='IMG' && el.complete && el.naturalWidth===0) ph();
+});
+
+/* ---------- typing effect ---------- */
+const lines=["automotive lighting firmware","CAN · LIN · UART · I²C · SPI","LVGL touch HMIs","MISRA C, pulse-tested, shipped","national FPV drone racing champion"];
+const t=document.getElementById('typed');let li=0,ci=0,del=false;
+(function type(){
+  const s=lines[li];
+  t.innerHTML='&gt; <b>'+s.slice(0,ci)+'</b>';
+  if(!del&&ci<s.length){ci++;setTimeout(type,55);}
+  else if(!del){del=true;setTimeout(type,1600);}
+  else if(ci>0){ci--;setTimeout(type,25);}
+  else{del=false;li=(li+1)%lines.length;setTimeout(type,300);}
+})();
+
+/* ---------- reveal on scroll + counters ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const end=+el.dataset.count;let v=0;const step=Math.max(1,Math.ceil(end/40));
+  const run=()=>{v=Math.min(end,v+step);el.textContent=v;if(v<end)requestAnimationFrame(run);};
+  setTimeout(run,600);
+});
+
+/* ---------- lightbox ---------- */
+document.querySelectorAll('.gallery .media').forEach(m=>m.addEventListener('click',()=>{
+  const img=m.querySelector('img');if(!img)return;
+  const lb=document.getElementById('lb');lb.querySelector('img').src=img.src;lb.classList.add('open');
+}));
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- animated PCB-trace background ---------- */
+(function(){
+  const c=document.getElementById('bg'),x=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,G=40,traces=[],pulses=[];
+  function build(){
+    W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;
+    c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
+    G=40*devicePixelRatio;traces=[];
+    const n=Math.round((innerWidth*innerHeight)/26000);
+    for(let i=0;i<n;i++){
+      let px=Math.floor(Math.random()*W/G)*G,py=Math.floor(Math.random()*H/G)*G;
+      const pts=[[px,py]];let dir=Math.floor(Math.random()*4);
+      const len=3+Math.floor(Math.random()*6);
+      for(let k=0;k<len;k++){
+        if(Math.random()<.4)dir=(dir+(Math.random()<.5?1:3))%4;
+        const d=[[1,0],[0,1],[-1,0],[0,-1]][dir];
+        const s=G*(1+Math.floor(Math.random()*3));
+        px+=d[0]*s;py+=d[1]*s;pts.push([px,py]);
+      }
+      traces.push(pts);
+    }
+    pulses=traces.map(tr=>({tr,p:Math.random(),sp:.0015+Math.random()*.004,amber:Math.random()<.18}));
+  }
+  function lenOf(tr){let L=0;for(let i=1;i<tr.length;i++)L+=Math.hypot(tr[i][0]-tr[i-1][0],tr[i][1]-tr[i-1][1]);return L;}
+  function at(tr,f){
+    let L=lenOf(tr)*f;
+    for(let i=1;i<tr.length;i++){const a=tr[i-1],b=tr[i],s=Math.hypot(b[0]-a[0],b[1]-a[1]);
+      if(L<=s){const r=s?L/s:0;return[a[0]+(b[0]-a[0])*r,a[1]+(b[1]-a[1])*r];}L-=s;}
+    return tr[tr.length-1];
+  }
+  let my=0;addEventListener('scroll',()=>my=scrollY);
+  function draw(){
+    x.clearRect(0,0,W,H);
+    x.save();x.translate(0,-(my*.15*devicePixelRatio)%G);
+    // grid dots
+    x.fillStyle='rgba(120,160,200,.07)';
+    for(let gx=0;gx<W;gx+=G)for(let gy=0;gy<H+G;gy+=G)x.fillRect(gx,gy,1.5,1.5);
+    // traces
+    x.lineWidth=1.2*devicePixelRatio;x.strokeStyle='rgba(34,211,238,.09)';
+    traces.forEach(tr=>{x.beginPath();x.moveTo(tr[0][0],tr[0][1]);tr.forEach(p=>x.lineTo(p[0],p[1]));x.stroke();
+      const e=tr[tr.length-1];x.beginPath();x.arc(e[0],e[1],3*devicePixelRatio,0,7);x.fillStyle='rgba(34,211,238,.18)';x.fill();
+      x.beginPath();x.arc(tr[0][0],tr[0][1],2.2*devicePixelRatio,0,7);x.fill();});
+    // signal pulses
+    pulses.forEach(p=>{
+      if(!reduce)p.p+=p.sp;if(p.p>1)p.p=0;
+      const [px,py]=at(p.tr,p.p);
+      const col=p.amber?'245,158,11':'34,211,238';
+      const g=x.createRadialGradient(px,py,0,px,py,14*devicePixelRatio);
+      g.addColorStop(0,`rgba(${col},.9)`);g.addColorStop(1,`rgba(${col},0)`);
+      x.fillStyle=g;x.beginPath();x.arc(px,py,14*devicePixelRatio,0,7);x.fill();
+    });
+    x.restore();
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  build();draw();addEventListener('resize',()=>{build();if(reduce)draw();});
+})();
+</script>
+</body>
+</html>
